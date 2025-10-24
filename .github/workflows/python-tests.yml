@@ -31,7 +31,7 @@ jobs:
       run: |
         git clone git@github.com:Prueba-Test-Privado/tests.git temp_repo
         mkdir -p tests_descargados
-        cp temp_repo/pruebas/test_*.py tests_descargados/ 2>/dev/null || echo "Algunos tests no encontrados"
+        cp temp_repo/test_*.py tests_descargados/
         rm -rf temp_repo
 
     - name: Ejecución notebook ejercicio1
