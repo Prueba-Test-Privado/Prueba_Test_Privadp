@@ -1,0 +1,12 @@
+texto2_test = 'ESTE TEXTO EN MAYUSCULAS'
+nombre = 'Alejandro jimenez franco'
+texto3_t = 'Este texto capitalizado'
+apples_t = 4
+aeppel_t = 159
+formateo_t = "My name is Sebastian, I'm 25"
+palabras_t = 'Hello World !'
+texto4_t = 'programar'
+texto5_t = 'jhon loves programming'
+texto6_t = ['Hello', 'World,', 'today', 'is', 'a', 'great', 'day']
+texto7_t = 169
+texto8_t = 'El examen era mañana y yo aun tenia mucho que estudiar. Me tome un vaso de leche con azucar, deje de mirar el cesped por la ventana de la habitacion y, aunque era dificil, me puse a estudiar como nunca antes habia hecho.'
