@@ -22,10 +22,10 @@ jobs:
 
     - name: Configuracion tests
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install jupyter nbconvert ipykernel nbformat
-        python -m ipykernel install --user --name=python3
+        mkdir -p ~/.ssh
+        echo "${{ secrets.ACTIONS_SSH_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
     
     - name: Descarga de tests
       run: |
