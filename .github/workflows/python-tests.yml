@@ -22,15 +22,16 @@ jobs:
     
     - name: Configuracion tests privados
       run: |
+        mkdir -p ~/.ssh
         echo "${{ secrets.TEST_CLAVE_PRIVADA }}" > ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
         ssh-keyscan github.com >> ~/.ssh/known_hosts
     
     - name: Descarga de tests privados
       run: |
-        git clone git@github.com:Prueba_Test_Privadp/Tests-Privados.git temp_repo
+        git clone git@github.com:Prueba_Test_Privadp/tests-Privados.git temp_repo
         mkdir -p tests_descargados
-        cp temp_repo/tests*.py tests_descargados/
+        cp temp_repo/test*.py tests_descargados/
         rm -rf temp_repo
 
     - name: Ejecución notebook ejercicio1
