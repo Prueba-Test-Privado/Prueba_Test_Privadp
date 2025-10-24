@@ -20,18 +20,18 @@ jobs:
         pip install jupyter nbconvert ipykernel nbformat
         python -m ipykernel install --user --name=python3
 
-    - name: Configuracion tests
+    - name: Configuracion tests privados
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.clave_privada }}" > ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
         ssh-keyscan github.com >> ~/.ssh/known_hosts
     
-    - name: Descarga de tests
+    - name: Descarga de tests privados
       run: |
         git clone git@github.com:Prueba-Test-Privado/tests.git temp_repo
-        mkdir -p tests_descargados/ejercicio1
-        cp temp_repo/pruebas/test_*.py tests_descargados 2>/dev/null || echo "Algunos tests no encontrados"
+        mkdir -p tests_descargados
+        cp temp_repo/pruebas/test_*.py tests_descargados/ 2>/dev/null || echo "Algunos tests no encontrados"
         rm -rf temp_repo
 
     - name: Ejecución notebook ejercicio1
