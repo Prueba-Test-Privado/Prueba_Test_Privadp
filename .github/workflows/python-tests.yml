@@ -19,25 +19,24 @@ jobs:
         pip install -r requirements.txt
         pip install jupyter nbconvert ipykernel nbformat
         python -m ipykernel install --user --name=python3
-
+    
     - name: Configuracion tests privados
       run: |
-        mkdir -p ~/.ssh
         echo "${{ secrets.TEST_CLAVE_PRIVADA }}" > ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
         ssh-keyscan github.com >> ~/.ssh/known_hosts
     
     - name: Descarga de tests privados
       run: |
-        git clone git@github.com:Prueba-Test-Privado/tests.git temp_repo
+        git clone git@github.com:Prueba_Test_Privadp/Tests-Privados.git temp_repo
         mkdir -p tests_descargados
-        cp temp_repo/test_*.py tests_descargados/
+        cp temp_repo/tests*.py tests_descargados/
         rm -rf temp_repo
 
     - name: Ejecución notebook ejercicio1
       run: |
         jupyter nbconvert --to notebook --execute notebooks/ejercicio1.ipynb --output ejercicio1_out.ipynb --ExecutePreprocessor.kernel_name=python3 --ExecutePreprocessor.timeout=300 --ExecutePreprocessor.allow_errors=true
     
-    - name: Ejecución tests notebook ejercicio1
+    - name: Run tests ejercicio1
       run: |
         PYTHONPATH=$PYTHONPATH:$(pwd)/data pytest tests_descargados/ -v
