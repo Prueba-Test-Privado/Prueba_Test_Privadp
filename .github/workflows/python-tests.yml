@@ -20,26 +20,11 @@ jobs:
         pip install jupyter nbconvert ipykernel nbformat
         python -m ipykernel install --user --name=python3
 
-    - name: Configuración de tests
-      run: |
-        mkdir -p ~/.ssh
-        cat > ~/.ssh/id_ed25519 << 'EOF'
-        ${{ secrets.TEST_OCULTOS }}
-        EOF
-        chmod 600 ~/.ssh/id_ed25519
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-    - name: Descarga de tests
-      run: |
-        git clone git@github.com:Procesamiento-de-Lenguaje-Natural/test-privado-taller1.git temp_repo
-        mkdir -p tests_descargados/ejercicio1
-        cp temp_repo/pruebas/test_*.py tests_descargados/ejercicio1/ 2>/dev/null || echo "Algunos tests no encontrados"
-        rm -rf temp_repo
-
     - name: Ejecución notebook ejercicio1
       run: |
         jupyter nbconvert --to notebook --execute notebooks/ejercicio1.ipynb --output ejercicio1_out.ipynb --ExecutePreprocessor.kernel_name=python3 --ExecutePreprocessor.timeout=300 --ExecutePreprocessor.allow_errors=true
 
     - name: Verificación de tests
       run: |
-        PYTHONPATH=$PYTHONPATH:$(pwd)/data pytest tests_descargados/ejercicio1/ -v
+        PYTHONPATH=$PYTHONPATH:$(pwd)/data pytest tests/test_1.py -v
+        PYTHONPATH=$PYTHONPATH:$(pwd)/data pytest tests/test_2.py -v
